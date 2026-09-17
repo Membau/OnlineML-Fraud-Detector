@@ -37,16 +37,3 @@ To give the system prior knowledge and avoid the warm-up penalty, pre-train the 
 python pretrain.py
 ```
 This generates `model_sgd.pkl` and `model_adam.pkl`.
-
-### 3. Running the System
-You can start the entire system (Server + Dashboard + High-speed Simulator) automatically using the provided batch file:
-```bash
-Speedup.bat
-```
-Alternatively, to simulate real-time POS traffic (slower rate):
-```bash
-run.bat
-```
-
-## Note on Features
-The `Time` feature from the original Kaggle dataset is strictly monotonically increasing. Feeding this into an online `StandardScaler` causes catastrophic scaling artifacts when re-iterating over the dataset. Therefore, the `Time` feature is explicitly dropped across all scripts before passing data to the models.
