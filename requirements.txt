@@ -1,0 +1,8 @@
+river
+streamlit
+pandas
+plotly
+fastapi
+uvicorn[standard]
+requests
+pydantic
