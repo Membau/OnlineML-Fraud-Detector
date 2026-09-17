@@ -37,3 +37,26 @@ To give the system prior knowledge and avoid the warm-up penalty, pre-train the 
 python pretrain.py
 ```
 This generates `model_sgd.pkl` and `model_adam.pkl`.
+
+### 3. Running the System
+To run the system manually, you will need to open **three separate terminals** and ensure your virtual environment is activated in each one.
+
+**Terminal 1: Start the FastAPI ML Server**
+```bash
+uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+```
+
+**Terminal 2: Start the Streamlit Dashboard**
+```bash
+streamlit run view.py
+```
+
+**Terminal 3: Start the Data Simulator**
+To simulate real-time POS traffic with a slight delay:
+```bash
+python pos_producer.py --rows 500 --delay 0.01
+```
+*(Alternatively, you can run `python boost.py` to bombard the server with high-speed transactions for load testing).*
+
+## Note on Features
+The `Time` feature from the original Kaggle dataset is strictly monotonically increasing. Feeding this into an online `StandardScaler` causes catastrophic scaling artifacts when re-iterating over the dataset. Therefore, the `Time` feature is explicitly dropped across all scripts before passing data to the models.
